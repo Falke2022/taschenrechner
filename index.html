@@ -1,0 +1,2003 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casio fx-991DE X CLASSWIZ</title>
+<style>
+/* Styles */
+:root {
+  --case: #1c1d22;
+  --black: #2a2b30;
+  --white: #f2f2f2;
+  --blue: #2a6fd6;
+  --yellow: #e8d44d;
+  --pink: #ff6b8a;
+  --cyan: #86b8d7;
+  --lcd: #b8c4a6;
+  --ink: #1d2a1d;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: #e2e2e0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.calculator {
+  width: min(100%, 380px);
+  container-type: inline-size;
+  padding: 2.7cqw 3.2cqw 4.7cqw;
+  color: #fff;
+  border: .8cqw solid #c5c6c4;
+  border-top-color: #77787a;
+  border-radius: 7cqw 7cqw 8cqw 8cqw;
+  background:
+    repeating-linear-gradient(
+      135deg,
+      transparent 0 3px,
+      rgba(255,255,255,.035) 3px 5px,
+      transparent 5px 8px,
+      rgba(0,0,0,.12) 8px 10px
+    ),
+    repeating-linear-gradient(
+      45deg,
+      transparent 0 8px,
+      rgba(255,255,255,.018) 8px 10px
+    ),
+    linear-gradient(115deg, #292a2e, var(--case) 65%, #151619);
+  box-shadow:
+    0 1.5cqw 3cqw #0004,
+    inset 0 0 0 .3cqw #ffffff10;
+  user-select: none;
+}
+
+.top {
+  height: 21cqw;
+  display: grid;
+  grid-template-columns: 41% 59%;
+  align-items: start;
+  gap: 1cqw;
+  padding: .5cqw 1cqw 0 3.8cqw;
+}
+
+.brand { line-height: 1; }
+
+.casio {
+  color: #f4f4f4;
+  font-size: 7.3cqw;
+  font-weight: 900;
+  letter-spacing: -.3cqw;
+  text-shadow: 0 .3cqw .4cqw #000;
+}
+
+.model {
+  margin: 3.2cqw 0 0 .6cqw;
+  font-size: 3.9cqw;
+  font-weight: 800;
+  letter-spacing: -.1cqw;
+}
+
+.classwiz {
+  margin: .5cqw 0 0 -.5cqw;
+  color: #d87791;
+  font-size: 4cqw;
+  font-weight: 800;
+  letter-spacing: .6cqw;
+}
+
+.solar {
+  height: 19cqw;
+  border: 1.3cqw solid #101012;
+  border-radius: 3.5cqw 3.5cqw 2.4cqw 2.4cqw;
+  background:
+    linear-gradient(130deg, #ffffff15, transparent 45%),
+    linear-gradient(#211a19, #171313);
+  box-shadow:
+    inset 0 .7cqw 1.5cqw #000b,
+    .5cqw .3cqw .4cqw #ffffff45,
+    0 .4cqw .7cqw #000;
+}
+
+.display-frame {
+  margin: 1cqw 1.3cqw 3.5cqw;
+  padding: 2.3cqw;
+  border-radius: 3.8cqw;
+  background: linear-gradient(135deg, #090a0b, #202020 48%, #090a0b);
+  box-shadow:
+    inset 0 .4cqw .8cqw #ffffff22,
+    0 .7cqw 1cqw #0008;
+}
+
+.display {
+  height: 45cqw;
+  padding: 1.5cqw 2cqw;
+  overflow: hidden;
+  color: var(--ink);
+  background:
+    linear-gradient(140deg, #ffffff38, transparent 45%),
+    linear-gradient(#c3cbb6, var(--lcd));
+  border: .5cqw solid #727b6e;
+  border-radius: 1.5cqw;
+  box-shadow: inset 0 0 2cqw #39473755;
+  font-family: "Courier New", monospace;
+}
+
+.status {
+  display: flex;
+  gap: 1.4cqw;
+  height: 4cqw;
+  font-size: 2.4cqw;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.status span { opacity: .15; }
+.status span.active { opacity: 1; }
+
+.expression {
+  height: 17cqw;
+  margin-top: 0;
+  padding-top: 2.5cqw;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 4.8cqw;
+  line-height: 1.3;
+}
+
+.result {
+  height: 15cqw;
+  overflow: hidden;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: 6cqw;
+  line-height: 1.1;
+}
+
+/* Gestapelte Brüche und echte Hochstellung */
+.frac {
+  display: inline-flex;
+  flex-direction: column;
+  text-align: center;
+  vertical-align: middle;
+  margin: 0 .12em;
+  line-height: 1.1;
+}
+
+.frac > .num {
+  padding: 0 .15em .05em;
+  border-bottom: .09em solid currentColor;
+}
+
+.frac > .den {
+  padding: .05em .15em 0;
+}
+
+.frac .frac { font-size: .85em; }
+.result > .frac { font-size: .82em; }
+.result .radical { line-height: 1.15; }
+
+.sup {
+  font-size: .65em;
+  vertical-align: .75em;
+  line-height: 0;
+}
+
+.sup .sup { vertical-align: .6em; }
+
+.radical {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.radical > .radicand {
+  display: inline-block;
+  padding: 0 .08em 0 .06em;
+  border-top: .08em solid currentColor;
+  line-height: 1;
+}
+
+.ph {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: .55em;
+  height: .8em;
+  vertical-align: middle;
+  border: .08em dashed currentColor;
+  opacity: .55;
+}
+
+.hint {
+  height: 3.5cqw;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 2.4cqw;
+}
+
+.cursor {
+  display: inline-block;
+  width: .45cqw;
+  height: 1.05em;
+  vertical-align: middle;
+  background: var(--ink);
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink { 50% { opacity: 0; } }
+
+button {
+  border: 0;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible {
+  outline: .6cqw solid var(--yellow);
+  outline-offset: .3cqw;
+}
+
+button:active {
+  transform: translateY(2px);
+}
+
+.control-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 2.5fr 1fr 1fr;
+  gap: 1cqw;
+  align-items: center;
+  margin: 0 .8cqw .6cqw;
+}
+
+.control {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2cqw;
+}
+
+.control-label {
+  min-height: 3.4cqw;
+  white-space: nowrap;
+  font-size: 2.7cqw;
+  font-weight: 800;
+}
+
+.yellow { color: var(--yellow); }
+.pink { color: var(--pink); }
+.cyan { color: var(--cyan); }
+
+.round-key {
+  width: 8.5cqw;
+  height: 8.5cqw;
+  border: .7cqw solid #101112;
+  border-radius: 50%;
+  background:
+    conic-gradient(
+      from 45deg,
+      #929497, #d1d1cf, #636567, #eeeeeb,
+      #848689, #d2d3d1, #626466, #d9d9d7, #929497
+    );
+  box-shadow: 0 .6cqw .5cqw #000b;
+}
+
+.nav {
+  position: relative;
+  width: 30cqw;
+  height: 23cqw;
+  margin: 3cqw auto 0;
+  border: 1cqw solid #08090a;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #87898b, #36383a 50%, #a4a5a5);
+  box-shadow: 0 .5cqw .5cqw #000, inset 0 .3cqw .5cqw #ffffff80;
+}
+
+.nav button {
+  position: absolute;
+  color: #1b1c1e;
+  background: transparent;
+  font-size: 3.5cqw;
+  font-weight: bold;
+}
+
+.nav .up { top: .5cqw; left: 10cqw; width: 8cqw; height: 5cqw; }
+.nav .down { bottom: .5cqw; left: 10cqw; width: 8cqw; height: 5cqw; }
+.nav .left { top: 6cqw; left: .5cqw; width: 6cqw; height: 8cqw; }
+.nav .right { top: 6cqw; right: .5cqw; width: 6cqw; height: 8cqw; }
+
+.nav .ok {
+  top: 6cqw;
+  left: 9cqw;
+  width: 10cqw;
+  height: 9cqw;
+  border-radius: 45%;
+  color: #d9d9d9;
+  background: #161719;
+  box-shadow: inset 0 .4cqw .7cqw #000;
+  font-size: 2.3cqw;
+}
+
+.keyboard {
+  display: grid;
+  gap: .7cqw;
+}
+
+.row {
+  display: grid;
+  gap: 1.1cqw;
+}
+
+.row.six { grid-template-columns: repeat(6, 1fr); }
+.row.five { grid-template-columns: repeat(5, 1fr); }
+
+.key-cell { min-width: 0; }
+
+.secondary {
+  height: 3.5cqw;
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  overflow: hidden;
+  padding: 0 .15cqw .15cqw;
+  font-size: 2.2cqw;
+  font-weight: 800;
+  white-space: nowrap;
+  text-shadow: 0 .2cqw .3cqw #000;
+}
+
+.key {
+  width: 100%;
+  height: 8.2cqw;
+  border: .45cqw solid #111214;
+  border-radius: 1.8cqw;
+  color: #f4f4f4;
+  background: linear-gradient(#414247, var(--black) 45%, #191a1d);
+  box-shadow:
+    0 .7cqw 0 #0b0c0d,
+    0 1cqw .7cqw #0009,
+    inset 0 .3cqw .4cqw #ffffff26;
+  font-size: 4cqw;
+  font-weight: 800;
+  line-height: 1;
+  text-shadow: 0 .2cqw .2cqw #000;
+}
+
+.key:active {
+  box-shadow: 0 .2cqw 0 #0b0c0d, inset 0 .2cqw .4cqw #0005;
+}
+
+.key.small { font-size: 3cqw; }
+
+.number .key {
+  height: 11.2cqw;
+  border-color: #adadab;
+  border-radius: 1.8cqw;
+  color: #171719;
+  background: linear-gradient(#fff, var(--white) 65%, #dbdbd9);
+  box-shadow:
+    0 .8cqw 0 #999a99,
+    0 1.1cqw .8cqw #0009,
+    inset 0 .3cqw .4cqw #fff;
+  font-size: 7cqw;
+  text-shadow: none;
+}
+
+.number .key.small { font-size: 5.2cqw; }
+
+.blue .key {
+  color: #fff;
+  border-color: #123b80;
+  background: linear-gradient(#4487e5, var(--blue) 58%, #174f9e);
+  box-shadow:
+    0 .8cqw 0 #10376d,
+    0 1.1cqw .8cqw #0009,
+    inset 0 .3cqw .4cqw #ffffff55;
+  font-size: 5.5cqw;
+  text-shadow: 0 .2cqw .3cqw #17437e;
+}
+
+.empty { visibility: hidden; }
+
+.footer {
+  height: 2cqw;
+}
+</style>
+</head>
+<body>
+
+<!-- Layout -->
+<main class="calculator" aria-label="Wissenschaftlicher Taschenrechner">
+  <header class="top">
+    <div class="brand">
+      <div class="casio">CASIO</div>
+      <div class="model">fx-991DE X</div>
+      <div class="classwiz">CLASSWIZ</div>
+    </div>
+    <div class="solar" aria-hidden="true"></div>
+  </header>
+
+  <div class="display-frame">
+    <div class="display" role="status" aria-live="polite">
+      <div class="status">
+        <span id="st-shift">SHIFT</span>
+        <span id="st-alpha">ALPHA</span>
+        <span id="st-memory">M</span>
+        <span id="st-angle" class="active">DEG</span>
+        <span>FIX</span>
+        <span>SCI</span>
+        <span>STAT</span>
+      </div>
+      <div class="expression" id="expression"></div>
+      <div class="result" id="result">0</div>
+      <div class="hint" id="hint"></div>
+    </div>
+  </div>
+
+  <div class="control-row">
+    <div class="control">
+      <span class="control-label yellow">SHIFT</span>
+      <button class="round-key" data-action="shift" aria-label="SHIFT"></button>
+    </div>
+    <div class="control">
+      <span class="control-label pink">ALPHA</span>
+      <button class="round-key" data-action="alpha" aria-label="ALPHA"></button>
+    </div>
+    <div class="nav" aria-label="Navigation">
+      <button class="up" data-action="up" aria-label="Nach oben">▲</button>
+      <button class="down" data-action="down" aria-label="Nach unten">▼</button>
+      <button class="left" data-action="left" aria-label="Nach links">◀</button>
+      <button class="right" data-action="right" aria-label="Nach rechts">▶</button>
+      <button class="ok" data-action="ok">OK</button>
+    </div>
+    <div class="control">
+      <span class="control-label">MENU <span class="yellow">SETUP</span></span>
+      <button class="round-key" data-action="menu" aria-label="MENU SETUP"></button>
+    </div>
+    <div class="control">
+      <span class="control-label">ON</span>
+      <button class="round-key" data-action="on" aria-label="ON"></button>
+    </div>
+  </div>
+
+  <div class="keyboard" id="keyboard"></div>
+  <div class="footer"></div>
+</main>
+
+<script>
+"use strict";
+
+/* Tastenlayout */
+const rows = [
+  [
+    { main: "OPTN", shiftLabel: "QR", action: "options", shift: "unsupported" },
+    { main: "CALC", shiftLabel: "SOLVE", action: "calc", shift: "unsupported" },
+    { empty: true },
+    { empty: true },
+    { main: "∫", shiftLabel: "d/dx", action: "unsupported", shift: "unsupported" },
+    { main: "x", shiftLabel: "Σ", action: "variable", shift: "unsupported" }
+  ],
+  [
+    { main: "▭⁄▭", shiftLabel: "▭⁄▭", action: "fracKey", shift: "fraction" },
+    { main: "√", shiftLabel: "∛", insert: "sqrt(", shiftInsert: "cbrt(" },
+    { main: "x²", shiftLabel: "x³", insert: "^2", shiftInsert: "^3" },
+    { main: "x^□", shiftLabel: "ⁿ√", action: "supKey", shift: "rootKey" },
+    { main: "logₐ□", shiftLabel: "10ˣ", insert: "log(", shift: "tenPowKey" },
+    { main: "ln", shiftLabel: "eˣ", insert: "ln(", shiftInsert: "exp(" }
+  ],
+  [
+    { main: "(−)", shiftLabel: "log", alphaLabel: "A", insert: "-", shiftInsert: "log(", alphaInsert: "A" },
+    { main: "° ′ ″", shiftLabel: "FACT", alphaLabel: "B", action: "unsupported", shiftInsert: "!", alphaInsert: "B" },
+    { main: "x⁻¹", shiftLabel: "x!", alphaLabel: "C", insert: "^-1", shiftInsert: "!", alphaInsert: "C" },
+    { main: "sin", shiftLabel: "sin⁻¹", alphaLabel: "D", insert: "sin(", shiftInsert: "asin(", alphaInsert: "D" },
+    { main: "cos", shiftLabel: "cos⁻¹", alphaLabel: "E", insert: "cos(", shiftInsert: "acos(", alphaInsert: "E" },
+    { main: "tan", shiftLabel: "tan⁻¹", alphaLabel: "F", insert: "tan(", shiftInsert: "atan(", alphaInsert: "F" }
+  ],
+  [
+    { main: "STO", shiftLabel: "RECALL", action: "store", shift: "recall" },
+    { main: "ENG", shiftLabel: "←", action: "eng", shift: "engBack" },
+    { main: "(", shiftLabel: "Abs", insert: "(", shiftInsert: "abs(" },
+    { main: ")", shiftLabel: ":", insert: ")", shiftInsert: ";" },
+    { main: "S⇔D", shiftLabel: "a b/c", action: "fraction", shift: "fraction" },
+    { main: "M+", shiftLabel: "M−", alphaLabel: "M", action: "mplus", shift: "mminus", alphaInsert: "M" }
+  ],
+  [
+    { main: "7", shiftLabel: "CONST", insert: "7", shift: "constants" },
+    { main: "8", shiftLabel: "CONV", insert: "8", shift: "unsupported" },
+    { main: "9", shiftLabel: "RESET", insert: "9", shift: "reset" },
+    { main: "DEL", shiftLabel: "INS", alphaLabel: "UNDO", action: "del", shift: "insertMode", alpha: "undo", blue: true },
+    { main: "AC", shiftLabel: "OFF", action: "ac", shift: "off", blue: true }
+  ],
+  [
+    { main: "4", insert: "4" },
+    { main: "5", insert: "5" },
+    { main: "6", insert: "6" },
+    { main: "×", shiftLabel: "nPr", alphaLabel: "GCD", insert: "×", shiftInsert: " nPr ", alphaInsert: "gcd(" },
+    { main: "÷", shiftLabel: "nCr", alphaLabel: "LCM", insert: "÷", shiftInsert: " nCr ", alphaInsert: "lcm(" }
+  ],
+  [
+    { main: "1", insert: "1" },
+    { main: "2", insert: "2" },
+    { main: "3", insert: "3" },
+    { main: "+", shiftLabel: "Pol", alphaLabel: "Int", insert: "+", shift: "unsupported", alphaInsert: "int(" },
+    { main: "−", shiftLabel: "Rec", alphaLabel: "Intg", insert: "-", shift: "unsupported", alphaInsert: "intg(" }
+  ],
+  [
+    { main: "0", shiftLabel: "Rnd", alphaLabel: "RndFix", insert: "0", shiftInsert: "round(", alpha: "unsupported" },
+    { main: ",", shiftLabel: "Ran#", alphaLabel: "RanInt", insert: ".", shift: "random", alphaInsert: "randint(" },
+    { main: "×10ˣ", shiftLabel: "π", alphaLabel: "e", action: "sciKey", shiftInsert: "π", alphaInsert: "e" },
+    { main: "Ans", shiftLabel: "%", insert: "Ans", shiftInsert: "%" },
+    { main: "=", shiftLabel: "≈", action: "equals", shift: "equals" }
+  ]
+];
+
+const keyboard = document.getElementById("keyboard");
+
+rows.forEach(row => {
+  const rowEl = document.createElement("div");
+  rowEl.className = "row " + (row.length === 6 ? "six" : "five");
+
+  row.forEach(key => {
+    const cell = document.createElement("div");
+    const isNumberRow = row.length === 5;
+    cell.className = "key-cell" +
+      (isNumberRow ? " number" : "") +
+      (key.blue ? " blue" : "") +
+      (key.empty ? " empty" : "");
+
+    const labels = document.createElement("div");
+    labels.className = "secondary";
+
+    const shiftLabel = document.createElement("span");
+    shiftLabel.className = "yellow";
+    shiftLabel.textContent = key.shiftLabel || "";
+
+    const alphaLabel = document.createElement("span");
+    alphaLabel.className = "pink";
+    alphaLabel.textContent = key.alphaLabel || "";
+
+    labels.append(shiftLabel, alphaLabel);
+
+    const button = document.createElement("button");
+    button.className = "key" + ((key.main || "").length > 4 ? " small" : "");
+    button.textContent = key.main || "";
+    button.setAttribute("aria-label", key.main || "Leer");
+    if (key.empty) button.tabIndex = -1;
+    else button.addEventListener("click", () => pressKey(key));
+
+    cell.append(labels, button);
+    rowEl.append(cell);
+  });
+
+  keyboard.append(rowEl);
+});
+
+const state = {
+  expression: "",
+  cursor: 0,
+  result: 0,
+  answer: 0,
+  angle: "DEG",
+  layer: "",
+  memory: { A: 0, B: 0, C: 0, D: 0, E: 0, F: 0, M: 0 },
+  history: [],
+  historyIndex: 0,
+  draft: "",
+  pending: "",
+  menu: "",
+  error: false,
+  decimal: false,
+  engineering: null,
+  powered: true,
+  undo: null
+};
+
+/* Parser und Auswertung */
+function tokenize(input) {
+  const tokens = [];
+  let i = 0;
+
+  while (i < input.length) {
+    const rest = input.slice(i);
+
+    if (/^\s/.test(rest)) {
+      i++;
+      continue;
+    }
+
+    const number = rest.match(/^(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?/);
+    if (number) {
+      tokens.push({ type: "number", value: Number(number[0]) });
+      i += number[0].length;
+      continue;
+    }
+
+    const word = rest.match(
+      /^(?:randint|sqrt|cbrt|asin|acos|atan|sin|cos|tan|log|ln|exp|gcd|lcm|intg|int|round|abs|nPr|nCr|Ans|π|[A-FM]|e)/
+    );
+
+    if (word) {
+      tokens.push({ type: "word", value: word[0] });
+      i += word[0].length;
+      continue;
+    }
+
+    const char = input[i];
+    if ("+-×÷*/^!%();⁄{}".includes(char)) {
+      tokens.push({ type: char, value: char });
+      i++;
+      continue;
+    }
+
+    throw new Error("Syntax");
+  }
+
+  tokens.push({ type: "end" });
+  return tokens;
+}
+
+function finite(value) {
+  if (!Number.isFinite(value)) throw new Error("Math");
+  return value;
+}
+
+function factorial(n) {
+  if (!Number.isInteger(n) || n < 0 || n > 170) {
+    throw new Error("Math");
+  }
+
+  let value = 1;
+  for (let i = 2; i <= n; i++) value *= i;
+  return value;
+}
+
+function gcd(a, b) {
+  if (!Number.isSafeInteger(a) || !Number.isSafeInteger(b)) {
+    throw new Error("Math");
+  }
+
+  a = Math.abs(a);
+  b = Math.abs(b);
+
+  while (b) {
+    [a, b] = [b, a % b];
+  }
+
+  return a;
+}
+
+function callFunction(name, args) {
+  const one = () => {
+    if (args.length !== 1) throw new Error("Syntax");
+    return args[0];
+  };
+
+  const two = () => {
+    if (args.length !== 2) throw new Error("Syntax");
+    return args;
+  };
+
+  const toRadians = x => state.angle === "DEG" ? x * Math.PI / 180 : x;
+  const fromRadians = x => state.angle === "DEG" ? x * 180 / Math.PI : x;
+
+  let value;
+
+  switch (name) {
+    case "sqrt":
+      value = Math.sqrt(one());
+      break;
+    case "cbrt":
+      value = Math.cbrt(one());
+      break;
+    case "sin":
+      value = Math.sin(toRadians(one()));
+      break;
+    case "cos":
+      value = Math.cos(toRadians(one()));
+      break;
+    case "tan": {
+      const angle = toRadians(one());
+      if (Math.abs(Math.cos(angle)) < 1e-14) throw new Error("Math");
+      value = Math.tan(angle);
+      break;
+    }
+    case "asin":
+      value = fromRadians(Math.asin(one()));
+      break;
+    case "acos":
+      value = fromRadians(Math.acos(one()));
+      break;
+    case "atan":
+      value = fromRadians(Math.atan(one()));
+      break;
+    case "ln":
+      value = Math.log(one());
+      break;
+    case "exp":
+      value = Math.exp(one());
+      break;
+    case "abs":
+      value = Math.abs(one());
+      break;
+    case "log":
+      if (args.length === 1) {
+        value = Math.log10(args[0]);
+      } else if (
+        args.length === 2 &&
+        args[0] > 0 &&
+        args[0] !== 1 &&
+        args[1] > 0
+      ) {
+        value = Math.log(args[1]) / Math.log(args[0]);
+      } else {
+        throw new Error("Math");
+      }
+      break;
+    case "gcd": {
+      const [a, b] = two();
+      value = gcd(a, b);
+      break;
+    }
+    case "lcm": {
+      const [a, b] = two();
+      const divisor = gcd(a, b);
+      value = divisor === 0 ? 0 : Math.abs(a / divisor * b);
+      break;
+    }
+    case "int":
+      value = Math.trunc(one());
+      break;
+    case "intg":
+      value = Math.floor(one());
+      break;
+    case "round":
+      value = Number(one().toPrecision(10));
+      break;
+    case "randint": {
+      const [a, b] = two();
+      if (
+        !Number.isSafeInteger(a) ||
+        !Number.isSafeInteger(b) ||
+        a > b
+      ) {
+        throw new Error("Math");
+      }
+      value = Math.floor(Math.random() * (b - a + 1)) + a;
+      break;
+    }
+    default:
+      throw new Error("Syntax");
+  }
+
+  return finite(value);
+}
+
+function evaluate(input) {
+  const tokens = tokenize(input);
+  let pos = 0;
+
+  const peek = () => tokens[pos];
+
+  const take = type => {
+    if (peek().type !== type) throw new Error("Syntax");
+    return tokens[pos++];
+  };
+
+  const isWord = value =>
+    peek().type === "word" && peek().value === value;
+
+  const startsPrimary = token =>
+    token.type === "number" ||
+    token.type === "(" ||
+    token.type === "{" ||
+    token.type === "word";
+
+  function primary() {
+    if (peek().type === "number") {
+      return take("number").value;
+    }
+
+    if (peek().type === "(" || peek().type === "{") {
+      pos++;
+      const value = add();
+
+      if (peek().type === ")" || peek().type === "}") pos++;
+      else if (peek().type !== "end") throw new Error("Syntax");
+
+      return value;
+    }
+
+    if (peek().type === "word") {
+      const name = take("word").value;
+
+      if (name === "Ans") return state.answer;
+      if (name === "π") return Math.PI;
+      if (name === "e") return Math.E;
+
+      if (Object.prototype.hasOwnProperty.call(state.memory, name)) {
+        return state.memory[name];
+      }
+
+      take("(");
+      const args = [add()];
+
+      while (peek().type === ";") {
+        take(";");
+        args.push(add());
+      }
+
+      if (peek().type !== "end") take(")");
+      return callFunction(name, args);
+    }
+
+    throw new Error("Syntax");
+  }
+
+  function postfix() {
+    let value = primary();
+
+    while (peek().type === "!" || peek().type === "%") {
+      if (peek().type === "!") {
+        take("!");
+        value = factorial(value);
+      } else {
+        take("%");
+        value /= 100;
+      }
+    }
+
+    return value;
+  }
+
+  function power() {
+    let value = postfix();
+
+    if (peek().type === "^") {
+      take("^");
+      value = Math.pow(value, operand());
+    }
+
+    return finite(value);
+  }
+
+  function operand() {
+    if (peek().type === "+") {
+      take("+");
+      return operand();
+    }
+
+    if (peek().type === "-") {
+      take("-");
+      return -operand();
+    }
+
+    return power();
+  }
+
+  // Bruchstrich (⁄): bindet fester als × und ÷
+  function unary() {
+    let value = operand();
+
+    while (peek().type === "⁄") {
+      take("⁄");
+      const right = operand();
+      if (right === 0) throw new Error("Math");
+      value /= right;
+    }
+
+    return finite(value);
+  }
+
+  function combinations() {
+    let value = unary();
+
+    while (isWord("nPr") || isWord("nCr")) {
+      const operator = take("word").value;
+      const r = unary();
+
+      if (
+        !Number.isInteger(value) ||
+        !Number.isInteger(r) ||
+        value < 0 ||
+        r < 0 ||
+        r > value ||
+        value > 170
+      ) {
+        throw new Error("Math");
+      }
+
+      value = factorial(value) / factorial(value - r);
+      if (operator === "nCr") value /= factorial(r);
+      value = Math.round(value);
+    }
+
+    return value;
+  }
+
+  function multiply() {
+    let value = combinations();
+
+    while (true) {
+      const token = peek();
+
+      if (["×", "*", "÷", "/"].includes(token.type)) {
+        pos++;
+        const right = combinations();
+
+        if ((token.type === "÷" || token.type === "/") && right === 0) {
+          throw new Error("Math");
+        }
+
+        value = token.type === "×" || token.type === "*"
+          ? value * right
+          : value / right;
+      } else if (
+        startsPrimary(token) &&
+        !isWord("nPr") &&
+        !isWord("nCr")
+      ) {
+        value *= combinations();
+      } else {
+        break;
+      }
+
+      finite(value);
+    }
+
+    return value;
+  }
+
+  function add() {
+    let value = multiply();
+
+    while (peek().type === "+" || peek().type === "-") {
+      const operator = tokens[pos++].type;
+      const right = multiply();
+      value = operator === "+" ? value + right : value - right;
+      finite(value);
+    }
+
+    return value;
+  }
+
+  const result = add();
+  if (peek().type !== "end") throw new Error("Syntax");
+  return finite(result);
+}
+
+/* Ergebnisformatierung */
+function formatNumber(value) {
+  if (Object.is(value, -0) || Math.abs(value) < 1e-15) value = 0;
+
+  return Number(value.toPrecision(12))
+    .toString()
+    .replace("e+", "×10^")
+    .replace("e-", "×10^-");
+}
+
+function formatFraction(value) {
+  if (!Number.isFinite(value)) return null;
+  if (Number.isInteger(value)) return String(value);
+
+  const sign = value < 0 ? "-" : "";
+  const target = Math.abs(value);
+  let x = target;
+  let h0 = 0, h1 = 1, k0 = 1, k1 = 0;
+
+  for (let i = 0; i < 30; i++) {
+    const a = Math.floor(x);
+    const h = a * h1 + h0;
+    const k = a * k1 + k0;
+
+    if (k > 1000000 || !Number.isSafeInteger(h)) break;
+
+    if (Math.abs(h / k - target) <= 1e-12 * Math.max(1, target)) {
+      return sign + h + "/" + k;
+    }
+
+    [h0, h1, k0, k1] = [h1, h, k1, k];
+
+    const remainder = x - a;
+    if (remainder < 1e-15) break;
+    x = 1 / remainder;
+  }
+
+  return null;
+}
+
+function formatEngineering(value, offset) {
+  if (value === 0) return "0";
+
+  const exponent =
+    Math.floor(Math.log10(Math.abs(value)) / 3) * 3 + offset * 3;
+
+  return Number((value / Math.pow(10, exponent)).toPrecision(10)) +
+    "×10^" + exponent;
+}
+
+/* Exakte Darstellung: Bruch, Wurzel, Vielfaches von π */
+function toFraction(x, maxDen) {
+  if (x === 0) return [0, 1];
+
+  let h0 = 0, h1 = 1, k0 = 1, k1 = 0, y = x;
+
+  for (let i = 0; i < 40; i++) {
+    const a = Math.floor(y);
+    const h = a * h1 + h0;
+    const k = a * k1 + k0;
+
+    if (k > maxDen || !Number.isSafeInteger(h)) return null;
+    if (Math.abs(h / k - x) <= 1e-11 * x) return [h, k];
+
+    [h0, h1, k0, k1] = [h1, h, k1, k];
+
+    const rest = y - a;
+    if (rest < 1e-13) return null;
+    y = 1 / rest;
+  }
+
+  return null;
+}
+
+const SQUAREFREE = [];
+for (let n = 2; n <= 300; n++) {
+  let free = true;
+  for (let d = 2; d * d <= n; d++) {
+    if (n % (d * d) === 0) { free = false; break; }
+  }
+  if (free) SQUAREFREE.push(n);
+}
+
+function exactForm(value) {
+  if (!Number.isFinite(value)) return null;
+
+  const sign = value < 0 ? "−" : "";
+  const x = Math.abs(value);
+
+  let f = toFraction(x, 10000);
+  if (f) return { sign, kind: "frac", p: f[0], q: f[1] };
+
+  for (const n of SQUAREFREE) {
+    f = toFraction(x / Math.sqrt(n), 1000);
+    if (f) return { sign, kind: "root", n, p: f[0], q: f[1] };
+  }
+
+  f = toFraction(x / Math.PI, 1000);
+  if (f) return { sign, kind: "pi", p: f[0], q: f[1] };
+
+  return null;
+}
+
+/* Display: Layout mit gestapelten Brüchen und Hochstellung */
+const FUNCTION_WORD = /^(?:randint|sqrt|cbrt|asin|acos|atan|sin|cos|tan|log|ln|exp|gcd|lcm|intg|int|round|abs)$/;
+
+function scanToken(str, pos) {
+  if (pos >= str.length) return { type: "end", v: "", s: pos, e: pos };
+
+  const rest = str.slice(pos);
+  let m = rest.match(/^(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?/);
+  if (m) return { type: "number", v: m[0], s: pos, e: pos + m[0].length };
+
+  m = rest.match(
+    /^(?:randint|sqrt|cbrt|asin|acos|atan|sin|cos|tan|log|ln|exp|gcd|lcm|intg|int|round|abs|nPr|nCr|Ans|π|[A-FM]|e)/
+  );
+  if (m) return { type: "word", v: m[0], s: pos, e: pos + m[0].length };
+
+  return { type: "char", v: str[pos], s: pos, e: pos + 1 };
+}
+
+function buildLayout(str) {
+  let pos = 0;
+  const tok = () => scanToken(str, pos);
+  const isChar = (t, v) => t.type === "char" && t.v === v;
+  const text = (v, s) => ({ k: "text", v, s });
+  const placeholder = () => ({ k: "ph", s: pos, e: pos });
+  const isOperatorWord = t => t.type === "word" && (t.v === "nPr" || t.v === "nCr");
+
+  function parseAtom() {
+    const t = tok();
+
+    if (t.type === "number") {
+      pos = t.e;
+      return text(t.v, t.s);
+    }
+
+    if (t.type === "word" && !isOperatorWord(t)) {
+      pos = t.e;
+      const name = text(t.v, t.s);
+
+      if (FUNCTION_WORD.test(t.v) && isChar(tok(), "(")) {
+        return { k: "seq", items: [name, parseGroup()] };
+      }
+
+      return name;
+    }
+
+    if (isChar(t, "(") || isChar(t, "{")) return parseGroup();
+
+    return placeholder();
+  }
+
+  function parsePostfix() {
+    let node = parseAtom();
+
+    while (isChar(tok(), "!") || isChar(tok(), "%")) {
+      const t = tok();
+      pos = t.e;
+      node = { k: "seq", items: [node, text(t.v, t.s)] };
+    }
+
+    return node;
+  }
+
+  function parsePower() {
+    const base = parsePostfix();
+
+    if (isChar(tok(), "^")) {
+      const opS = pos;
+      pos++;
+      return { k: "sup", base, exp: parseOperand(), opS };
+    }
+
+    return base;
+  }
+
+  function parseOperand() {
+    const signs = [];
+
+    while (isChar(tok(), "+") || isChar(tok(), "-")) {
+      signs.push(text(tok().v, pos));
+      pos++;
+    }
+
+    const node = parsePower();
+    return signs.length ? { k: "seq", items: [...signs, node] } : node;
+  }
+
+  function parseFrac() {
+    let node = parseOperand();
+
+    while (isChar(tok(), "⁄")) {
+      const opS = pos;
+      pos++;
+      node = { k: "frac", num: node, den: parseOperand(), opS };
+    }
+
+    return node;
+  }
+
+  function parseGroup() {
+    const s = pos;
+    const open = str[pos];
+    const closer = open === "(" ? ")" : "}";
+    pos++;
+
+    const items = parseSeq(open === "(" ? ")}" : "}");
+    let closed = false;
+
+    if (isChar(tok(), closer)) {
+      closed = true;
+      pos++;
+    }
+
+    const hidden = open === "{";
+    if (hidden && items.length === 0) items.push({ k: "ph", s, e: s + 1 });
+
+    return { k: "group", s, e: pos, items, closed, hidden };
+  }
+
+  function parseSeq(stopChars) {
+    const items = [];
+
+    while (true) {
+      const t = tok();
+      if (t.type === "end") break;
+
+      if (t.type === "char" && (t.v === ")" || t.v === "}")) {
+        if (stopChars && stopChars.includes(t.v)) break;
+        items.push(text(t.v, t.s));
+        pos = t.e;
+        continue;
+      }
+
+      const startsOperand =
+        t.type === "number" ||
+        (t.type === "word" && !isOperatorWord(t)) ||
+        (t.type === "char" && ["(", "{", "^", "⁄"].includes(t.v));
+
+      if (startsOperand) {
+        items.push(parseFrac());
+      } else {
+        items.push(text(t.v, t.s));
+        pos = t.e;
+      }
+    }
+
+    return items;
+  }
+
+  return parseSeq(null);
+}
+
+function renderLayout(items, cursor) {
+  let placed = false;
+
+  const claim = (s, e) => {
+    if (!placed && cursor >= s && cursor <= e) {
+      placed = true;
+      return true;
+    }
+    return false;
+  };
+
+  const makeCursor = () => {
+    const el = document.createElement("span");
+    el.className = "cursor";
+    return el;
+  };
+
+  function leaf(parent, str, s) {
+    const el = document.createElement("span");
+
+    if (claim(s, s + str.length)) {
+      const at = cursor - s;
+      el.append(
+        document.createTextNode(str.slice(0, at)),
+        makeCursor(),
+        document.createTextNode(str.slice(at))
+      );
+    } else {
+      el.textContent = str;
+    }
+
+    parent.append(el);
+  }
+
+  function hiddenClaim(parent, s, e) {
+    if (claim(s, e)) parent.append(makeCursor());
+  }
+
+  function draw(parent, node, hideParens) {
+    switch (node.k) {
+      case "text":
+        leaf(parent, node.v, node.s);
+        break;
+
+      case "seq":
+        node.items.forEach(item => draw(parent, item, false));
+        break;
+
+      case "group":
+        if (node.hidden || hideParens) {
+          const onlyPlaceholder =
+            node.items.length === 1 &&
+            node.items[0].k === "ph" &&
+            node.items[0].e > node.items[0].s;
+
+          if (!onlyPlaceholder) hiddenClaim(parent, node.s, node.s + 1);
+          node.items.forEach(item => draw(parent, item, false));
+          if (node.closed) hiddenClaim(parent, node.e - 1, node.e - 1);
+        } else {
+          leaf(parent, "(", node.s);
+          node.items.forEach(item => draw(parent, item, false));
+          if (node.closed) leaf(parent, ")", node.e - 1);
+        }
+        break;
+
+      case "frac": {
+        const frac = document.createElement("span");
+        frac.className = "frac";
+
+        const num = document.createElement("span");
+        num.className = "num";
+        draw(num, node.num, true);
+        hiddenClaim(num, node.opS, node.opS);
+
+        const den = document.createElement("span");
+        den.className = "den";
+        draw(den, node.den, true);
+
+        frac.append(num, den);
+        parent.append(frac);
+        break;
+      }
+
+      case "sup": {
+        draw(parent, node.base, false);
+        hiddenClaim(parent, node.opS, node.opS);
+
+        const sup = document.createElement("span");
+        sup.className = "sup";
+        draw(sup, node.exp, true);
+        parent.append(sup);
+        break;
+      }
+
+      case "ph": {
+        const ph = document.createElement("span");
+        ph.className = "ph";
+        if (claim(node.s, node.e)) ph.append(makeCursor());
+        parent.append(ph);
+        break;
+      }
+    }
+  }
+
+  const root = document.createDocumentFragment();
+  items.forEach(item => draw(root, item, false));
+  if (!placed) root.append(makeCursor());
+  return root;
+}
+
+// Strukturelle Beschreibung: gleich aussehende Cursorpositionen ergeben denselben Text
+function serializeLayout(node) {
+  let out = "";
+
+  node.childNodes.forEach(child => {
+    if (child.nodeType === 3) {
+      out += child.textContent;
+    } else if (child.classList.contains("cursor")) {
+      out += "\u0001";
+    } else if (child.classList.contains("frac")) {
+      out += "⟦" + serializeLayout(child.children[0]) + "§" +
+        serializeLayout(child.children[1]) + "⟧";
+    } else if (child.classList.contains("sup")) {
+      out += "⟨" + serializeLayout(child) + "⟩";
+    } else if (child.classList.contains("ph")) {
+      out += "□" + serializeLayout(child);
+    } else {
+      out += serializeLayout(child);
+    }
+  });
+
+  return out;
+}
+
+function cursorSignature(position) {
+  const holder = document.createElement("div");
+  holder.append(renderLayout(buildLayout(state.expression), position));
+  return serializeLayout(holder);
+}
+
+function moveCursor(direction) {
+  const str = state.expression;
+  const length = str.length;
+  const here = cursorSignature(state.cursor);
+  let target = direction > 0 ? length : 0;
+
+  for (let c = state.cursor + direction; c >= 0 && c <= length; c += direction) {
+    if (cursorSignature(c) !== here) {
+      target = c;
+      break;
+    }
+  }
+
+  // immer in das Feld hinein, damit Eingaben dort landen
+  if (direction > 0) {
+    while (str[target] === "{") target++;
+  } else {
+    while (target > 0 && str[target - 1] === "}") target--;
+  }
+
+  state.cursor = target;
+}
+
+function matchingBrace(str, openIndex) {
+  let depth = 0;
+
+  for (let i = openIndex; i < str.length; i++) {
+    if (str[i] === "{") depth++;
+    if (str[i] === "}" && --depth === 0) return i;
+  }
+
+  return -1;
+}
+
+// Ergebnis: Exponenten (×10^n) hochgestellt, Brüche gestapelt
+function setResultText(el, str) {
+  el.replaceChildren();
+  const idx = str.indexOf("^");
+
+  if (idx < 0) {
+    el.textContent = str;
+    return;
+  }
+
+  const sup = document.createElement("span");
+  sup.className = "sup";
+  sup.textContent = str.slice(idx + 1);
+  el.append(document.createTextNode(str.slice(0, idx)), sup);
+}
+
+function setResultExact(el, form) {
+  el.replaceChildren();
+
+  const top = document.createElement("span");
+
+  if (form.kind === "frac") {
+    top.textContent = String(form.p);
+  } else {
+    if (form.p !== 1) top.append(document.createTextNode(String(form.p)));
+
+    if (form.kind === "pi") {
+      top.append(document.createTextNode("π"));
+    } else {
+      const root = document.createElement("span");
+      root.className = "radical";
+      const radicand = document.createElement("span");
+      radicand.className = "radicand";
+      radicand.textContent = String(form.n);
+      root.append(document.createTextNode("√"), radicand);
+      top.append(root);
+    }
+  }
+
+  if (form.sign) el.append(document.createTextNode(form.sign));
+
+  if (form.q === 1) {
+    el.append(top);
+    return;
+  }
+
+  const frac = document.createElement("span");
+  frac.className = "frac";
+
+  top.className = "num";
+
+  const den = document.createElement("span");
+  den.className = "den";
+  den.textContent = String(form.q);
+
+  frac.append(top, den);
+  el.append(frac);
+}
+
+function setHint(text) {
+  document.getElementById("hint").textContent = text;
+}
+
+// Tief verschachtelte Brüche: Schrift verkleinern, bis alles in die Höhe passt
+function fitExpressionHeight(expression) {
+  expression.style.fontSize = "";
+  let scale = 1;
+
+  for (let pass = 0; pass < 3; pass++) {
+    const padding = parseFloat(getComputedStyle(expression).paddingTop) || 0;
+    const available = expression.clientHeight - padding - 2;
+    let top = Infinity;
+    let bottom = -Infinity;
+
+    expression.querySelectorAll(":scope span").forEach(el => {
+      const r = el.getBoundingClientRect();
+      if (r.height > 0) {
+        top = Math.min(top, r.top);
+        bottom = Math.max(bottom, r.bottom);
+      }
+    });
+
+    const content = bottom - top;
+    if (!(content > available)) break;
+
+    scale = Math.max(0.4, scale * available / content);
+    expression.style.fontSize = (4.8 * scale) + "cqw";
+  }
+}
+
+function render() {
+  const expression = document.getElementById("expression");
+  const result = document.getElementById("result");
+  const display = document.querySelector(".display");
+
+  display.style.visibility = state.powered ? "visible" : "hidden";
+
+  document.getElementById("st-shift")
+    .classList.toggle("active", state.layer === "shift");
+
+  document.getElementById("st-alpha")
+    .classList.toggle("active", state.layer === "alpha");
+
+  document.getElementById("st-memory")
+    .classList.toggle("active", state.memory.M !== 0);
+
+  document.getElementById("st-angle").textContent = state.angle;
+
+  expression.replaceChildren(
+    renderLayout(buildLayout(state.expression), state.cursor)
+  );
+
+  fitExpressionHeight(expression);
+
+  const cursor = expression.querySelector(".cursor");
+  if (cursor) {
+    const exprRect = expression.getBoundingClientRect();
+    const cursorRect = cursor.getBoundingClientRect();
+    const cursorLeft = cursorRect.left - exprRect.left + expression.scrollLeft;
+
+    if (cursorLeft < expression.scrollLeft) {
+      expression.scrollLeft = cursorLeft;
+    } else if (cursorLeft > expression.scrollLeft + expression.clientWidth - 10) {
+      expression.scrollLeft = cursorLeft - expression.clientWidth + 10;
+    }
+  }
+
+  if (state.error) {
+    setResultText(result, "Math ERROR");
+  } else if (state.engineering !== null) {
+    setResultText(
+      result,
+      formatEngineering(state.result, state.engineering)
+    );
+  } else {
+    const form = state.decimal ? null : exactForm(state.result);
+
+    if (form && !(form.kind === "frac" && form.q === 1)) {
+      setResultExact(result, form);
+    } else {
+      setResultText(result, formatNumber(state.result));
+    }
+  }
+}
+
+/* Tastenlogik */
+function saveUndo() {
+  state.undo = {
+    expression: state.expression,
+    cursor: state.cursor
+  };
+}
+
+function insert(text) {
+  if (!state.powered) return;
+
+  saveUndo();
+
+  state.expression =
+    state.expression.slice(0, state.cursor) +
+    text +
+    state.expression.slice(state.cursor);
+
+  state.cursor += text.length;
+  state.error = false;
+  state.menu = "";
+  render();
+}
+
+function insertTemplate(text, caret) {
+  insert(text);
+  state.cursor = state.cursor - text.length + caret;
+  render();
+}
+
+function deleteBackward() {
+  if (state.cursor === 0) return;
+
+  saveUndo();
+
+  const str = state.expression;
+  const at = state.cursor;
+  const before = str[at - 1];
+
+  if (before === "}") {
+    // in das Feld hineinspringen statt Struktur zu zerstören
+    state.cursor--;
+    return;
+  }
+
+  if (before === "{") {
+    if (str[at] === "}") {
+      state.expression = str.slice(0, at - 1) + str.slice(at + 1);
+      state.cursor--;
+    } else {
+      state.cursor--;
+    }
+    return;
+  }
+
+  let next = str.slice(0, at - 1) + str.slice(at);
+  state.cursor = at - 1;
+
+  // Wird ⁄ oder ^ gelöscht, verschwinden die Feldklammern dahinter
+  if ((before === "⁄" || before === "^") && next[state.cursor] === "{") {
+    const close = matchingBrace(next, state.cursor);
+
+    if (close > 0) {
+      next =
+        next.slice(0, state.cursor) +
+        next.slice(state.cursor + 1, close) +
+        next.slice(close + 1);
+    }
+  }
+
+  state.expression = next;
+}
+
+function currentValue() {
+  if (state.expression.trim() && !state.error) {
+    try {
+      return evaluate(state.expression);
+    } catch (_) {
+      return state.result;
+    }
+  }
+
+  return state.result;
+}
+
+function selectVariable(name) {
+  if (state.pending === "store") {
+    state.memory[name] = currentValue();
+    setHint("Gespeichert: " + name);
+  } else {
+    insert(name);
+    setHint("Abgerufen: " + name);
+  }
+
+  state.pending = "";
+  state.layer = "";
+}
+
+function pressKey(key) {
+  if (!state.powered) return;
+
+  if (state.pending) {
+    if (key.alphaInsert && /^[A-FM]$/.test(key.alphaInsert)) {
+      selectVariable(key.alphaInsert);
+    } else {
+      setHint("Taste mit A–F oder M wählen");
+    }
+    render();
+    return;
+  }
+
+  if (state.menu === "setup") {
+    if (key.insert === "1" || key.insert === "2") {
+      state.angle = key.insert === "1" ? "DEG" : "RAD";
+      state.menu = "";
+      setHint("");
+      render();
+      return;
+    }
+    state.menu = "";
+  } else if (state.menu) {
+    state.menu = "";
+    setHint("");
+  }
+
+  const layer = state.layer;
+  state.layer = "";
+
+  if (layer === "alpha") {
+    if (key.alphaInsert !== undefined) insert(key.alphaInsert);
+    else if (key.alpha) action(key.alpha);
+    else setHint("Keine ALPHA-Funktion");
+  } else if (layer === "shift") {
+    if (key.shiftInsert !== undefined) insert(key.shiftInsert);
+    else if (key.shift) action(key.shift);
+    else setHint("Keine SHIFT-Funktion");
+  } else if (key.insert !== undefined) {
+    insert(key.insert);
+  } else if (key.action) {
+    action(key.action);
+  }
+
+  render();
+}
+
+function calculate() {
+  if (!state.expression.trim()) return;
+
+  try {
+    const value = evaluate(state.expression);
+
+    state.result = value;
+    state.answer = value;
+    state.error = false;
+    state.decimal = false;
+    state.engineering = null;
+
+    if (state.history[state.history.length - 1] !== state.expression) {
+      state.history.push(state.expression);
+      if (state.history.length > 50) state.history.shift();
+    }
+
+    state.historyIndex = state.history.length;
+    state.draft = "";
+    setHint("");
+  } catch (_) {
+    state.error = true;
+    setHint("Ausdruck prüfen");
+  }
+}
+
+function historyMove(direction) {
+  if (!state.history.length) return;
+
+  if (state.historyIndex === state.history.length) {
+    state.draft = state.expression;
+  }
+
+  state.historyIndex = Math.max(
+    0,
+    Math.min(state.history.length, state.historyIndex + direction)
+  );
+
+  state.expression = state.historyIndex === state.history.length
+    ? state.draft
+    : state.history[state.historyIndex];
+
+  state.cursor = state.expression.length;
+  state.error = false;
+}
+
+function action(name) {
+  if (!state.powered && name !== "on") return;
+
+  switch (name) {
+    case "shift":
+      state.layer = state.layer === "shift" ? "" : "shift";
+      break;
+
+    case "alpha":
+      if (!state.pending) {
+        state.layer = state.layer === "alpha" ? "" : "alpha";
+      }
+      break;
+
+    case "menu":
+      if (state.layer === "shift") {
+        state.layer = "";
+        action("setup");
+      } else {
+        state.menu = "menu";
+        setHint("Berechnen · SHIFT MENU: Setup");
+      }
+      break;
+
+    case "setup":
+      state.menu = "setup";
+      setHint("Winkel: 1: DEG   2: RAD");
+      break;
+
+    case "on":
+      state.powered = true;
+      state.menu = "";
+      setHint("");
+      break;
+
+    case "off":
+      state.powered = false;
+      state.layer = "";
+      setHint("");
+      break;
+
+    case "left":
+      moveCursor(-1);
+      break;
+
+    case "right":
+      moveCursor(1);
+      break;
+
+    case "fracKey": {
+      const before = state.expression.slice(0, state.cursor);
+
+      if (/(?:[0-9.)}!%π]|Ans|e|[A-FM])$/.test(before)) {
+        insertTemplate("⁄{}", 2);
+      } else {
+        insertTemplate("{}⁄{}", 1);
+      }
+      break;
+    }
+
+    case "supKey":
+      insertTemplate("^{}", 2);
+      break;
+
+    case "rootKey":
+      insertTemplate("^{{1}⁄{}}", 7);
+      break;
+
+    case "tenPowKey":
+      insertTemplate("10^{}", 4);
+      break;
+
+    case "sciKey":
+      insertTemplate("×10^{}", 5);
+      break;
+
+    case "up":
+      historyMove(-1);
+      break;
+
+    case "down":
+      historyMove(1);
+      break;
+
+    case "ok":
+      state.menu = "";
+      setHint("");
+      break;
+
+    case "equals":
+      calculate();
+      break;
+
+    case "del":
+      deleteBackward();
+      state.error = false;
+      break;
+
+    case "undo":
+      if (state.undo) {
+        const previous = state.undo;
+        saveUndo();
+        state.expression = previous.expression;
+        state.cursor = previous.cursor;
+      }
+      break;
+
+    case "ac":
+      saveUndo();
+      state.expression = "";
+      state.cursor = 0;
+      state.error = false;
+      state.layer = "";
+      state.pending = "";
+      state.menu = "";
+      state.engineering = null;
+      setHint("");
+      break;
+
+    case "store":
+      state.pending = "store";
+      setHint("STO: Taste mit A–F oder M wählen");
+      break;
+
+    case "recall":
+      state.pending = "recall";
+      setHint("RCL: Taste mit A–F oder M wählen");
+      break;
+
+    case "mplus":
+      try {
+        state.memory.M = finite(state.memory.M + currentValue());
+        setHint("M = " + formatNumber(state.memory.M));
+      } catch (_) {
+        state.error = true;
+      }
+      break;
+
+    case "mminus":
+      try {
+        state.memory.M = finite(state.memory.M - currentValue());
+        setHint("M = " + formatNumber(state.memory.M));
+      } catch (_) {
+        state.error = true;
+      }
+      break;
+
+    case "fraction":
+      state.decimal = !state.decimal;
+      state.engineering = null;
+      break;
+
+    case "eng":
+      state.engineering =
+        state.engineering === null ? 0 : state.engineering - 1;
+      break;
+
+    case "engBack":
+      state.engineering =
+        state.engineering === null ? 0 : state.engineering + 1;
+      break;
+
+    case "random":
+      insert(String(Number(Math.random().toFixed(3))));
+      break;
+
+    case "variable":
+      insert("A");
+      setHint("Variable A eingefügt");
+      break;
+
+    case "calc":
+      calculate();
+      break;
+
+    case "options":
+      setHint("Funktionen über die Tasten eingeben");
+      break;
+
+    case "constants":
+      setHint("π und e: SHIFT bzw. ALPHA + ×10ˣ");
+      break;
+
+    case "insertMode":
+      setHint("Einfügemodus ist aktiv");
+      break;
+
+    case "reset":
+      state.memory = {
+        A: 0, B: 0, C: 0, D: 0, E: 0, F: 0, M: 0
+      };
+      state.answer = 0;
+      state.result = 0;
+      state.history = [];
+      state.historyIndex = 0;
+      state.angle = "DEG";
+      action("ac");
+      setHint("Speicher und Einstellungen zurückgesetzt");
+      break;
+
+    case "unsupported":
+      setHint("Diese Funktion ist nicht verfügbar");
+      break;
+  }
+
+  render();
+}
+
+/* Tastenbindung */
+document.querySelectorAll("[data-action]").forEach(button => {
+  button.addEventListener("click", () => action(button.dataset.action));
+});
+
+document.addEventListener("keydown", event => {
+  if (event.ctrlKey || event.metaKey || event.altKey) return;
+
+  const key = event.key;
+
+  if (!state.powered && key !== "Escape") return;
+
+  if (/^[0-9]$/.test(key)) {
+    insert(key);
+  } else if (key === "." || key === ",") {
+    insert(".");
+  } else if (key === ";") {
+    insert(";");
+  } else if (key === "^") {
+    action("supKey");
+  } else if (["+", "-", "(", ")"].includes(key)) {
+    insert(key);
+  } else if (key === "*") {
+    insert("×");
+  } else if (key === "/") {
+    action("fracKey");
+  } else if (key === "Enter" || key === "=") {
+    action("equals");
+  } else if (key === "Backspace") {
+    action("del");
+  } else if (key === "Escape") {
+    if (!state.powered) action("on");
+    else action("ac");
+  } else if (key === "ArrowLeft") {
+    action("left");
+  } else if (key === "ArrowRight") {
+    action("right");
+  } else if (key === "ArrowUp") {
+    action("up");
+  } else if (key === "ArrowDown") {
+    action("down");
+  } else {
+    return;
+  }
+
+  event.preventDefault();
+});
+
+render();
+</script>
+</body>
+</html>
